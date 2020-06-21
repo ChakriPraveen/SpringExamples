@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">-->
+<!--<beans default-init-method="globalInit" default-destroy-method="gloalLastClean">-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans.xsd 
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--<bean id="triangle" class="javaapplication3.Triangle" name="tri-praveen" autowire="byName" init-method="init" destroy-method="lastClean">-->
+        <!--property name="type" value="Equilateral"/>
+        <constructor-arg index="0" value="Equal"/>
+        <constructor-arg index="1" value="20"/>
+        <property name="pointB" ref="point2"/>
+        <property name="pointA">
+            <ref bean="point1"/>
+        </property>
+       
+        
+        <property name="pointC">
+           <bean id="point3" class="javaapplication3.Point">
+                <property name="x" value="0"/>
+                <property name="y" value="20"/>    
+            </bean> 
+        </property-->
+    <!--</bean>-->
+    
+    <bean id="pointA" class="javaapplication3.Point">
+        <qualifier value="CircleRequired"/>
+        <property name="y" value="${y}"/>    
+    </bean>
+    
+    <bean id="pointB" class="javaapplication3.Point">
+        <property name="x" value="-20"/>
+        <property name="y" value="0"/>    
+    </bean>
+    
+     <bean id="pointC" class="javaapplication3.Point">
+                <property name="x" value="0"/>
+                <property name="y" value="20"/>    
+     </bean> 
+     
+     <bean id="center" class="javaapplication3.Point">
+                <property name="x" value="0"/>
+                <property name="y" value="20"/>    
+     </bean> 
+    
+    <bean class="javaapplication3.MyBeanFactoryPP"/>
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations" value="Points.properties"></property>
+    </bean>
+    <bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"/>
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <value>Points</value>
+            </list>
+        </property>
+     </bean>   
+    <context:annotation-config/>
+    <context:component-scan base-package="javaapplication3"/>
+    <alias name="triangle" alias="triangle-alias"></alias>
+</beans>
+
+
+
